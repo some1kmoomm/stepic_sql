@@ -1,0 +1,81 @@
+SELECT [DISTINCT | ALL]{*
+
+| [<выражение для столбца> [[AS] <псевдоним>]] [,…]}
+
+FROM <имя таблицы> [[AS] <псевдоним>] [,…]
+
+[WHERE <предикат>]
+
+[[GROUP BY <список столбцов>]
+
+[HAVING <условие на агрегатные значения>] ]
+
+[ORDER BY <список столбцов>]
+
+
+FROM
+WHERE
+GROUP BY
+HAVING
+SELECT
+ORDER BY
+
+
+
+SELECT author,
+    MIN(price) AS Минимальная_цена,
+    MAX(price) AS Максимальная_цена
+FROM book
+WHERE author <> 'Есенин С.А.'
+GROUP BY author
+HAVING SUM(amount) > 10;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT author, title, amount
+FROM book
+WHERE amount IN (SELECT COUNT(amount) = 1 FROM book)
+
+
+
+SELECT author, price
+FROM book
+WHERE price < ANY (SELECT MIN(price) FROM book GROUP BY author)
+
+
+
+
+
+
+Task 1.
+Use English SpaCy lib, find all tokens with only digits and all proper nouns (PROPN, aka, personal nouns ) in the text, count it and output it right-aligned in the HTML.
+For example, for the text "we need 2 tickets to Dublin, and 1/2 a spoon of milk" read from the stdin (use python myprogram.py < input.txt >output.html ) the program should output that "2" was found twice (output "2"), "1" was found once (output "1"), "Dublin" was found once (output "1").
+
+
+Задача 2.
+Написать программу на питоне, выдающую без повторений на stdout все различные перестановки N одинаковых (0) и N разных чисел (от 1 до N).
+Запуск программы должен выглядеть так: "python permute.py 5"
+Скажем, для N=5, пусть это будут числа 0 0 0 0 0 1 2 3 4 5 .
+Примеры таких перестановок: 0000012345 или 5012034000
+Теперь выведите все такие перестановки для N=5 и сохраните их в файл.
+Посчитайте с помощью wc количество строк в этом файле.
+Сколько получилось?
+Попробуйте оценить время, которое будет ваш алгоритм считаться для N=7 (это не значит, что ваш алгоритм должен быть самый лучший и быстрый, просто грубо оцените примерное время выполнения именно для вашего алгоритма, исходя из вашего понимания).
+В этом ответе укажите код программы
